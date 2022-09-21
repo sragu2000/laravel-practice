@@ -3,8 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\First;
-use App\Http\Controllers\VehicleController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\productTypeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,7 +30,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //With Controller 
 Route::get("addNumbers",[First::class,"addNumbers"]);
-Route::get("vehiclesOfUser",[VehicleController::class,"getVehiclesOfUser"]);
-Route::get("getVehicle",[VehicleController::class,"getSingleVehicle"]);
 Route::get("getUser",[UserController::class,"getSingleUser"]);
-Route::get("addUser",[UserController::class,"addNewUser"]);
+Route::post("addUser",[UserController::class,"addNewUser"]);
+Route::post("loginUser",[UserController::class,"loginUser"]);
+Route::post("addtype",[productTypeController::class,"addNewType"]);

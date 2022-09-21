@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('vehicles', function (Blueprint $table) {
+        Schema::create('product_type', function (Blueprint $table) {
             $table->id();
-            $table->string('makeName');
-            $table->string('brandName');
-            $table->string('modelName');
+            $table->string('typeName');
+            $table->string('description');
             $table->timestamps();
         });
     }
