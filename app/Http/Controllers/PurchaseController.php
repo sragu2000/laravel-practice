@@ -16,7 +16,6 @@ class PurchaseController extends Controller
         $newSupplier->productId = $r->productid;
         $newSupplier->quantity = $r->quantity;
         $newSupplier->purchasePrice = $r->purchaseprice;
-        $newSupplier->retailPrice = $r->retailprice;
         $newSupplier->date = $r->date;
         $newSupplier->save();
         return response()->json(array("message" => "success", "result" => true), 200);

@@ -18,7 +18,9 @@ return new class extends Migration
             $table->string('prdName');
             $table->integer('minimumStockLevel');
             $table->integer('type');
-            $table->string('description');
+            $table->integer('currentStock');
+            $table->integer('wacPrice');
+            $table->string('description')->nullable();
             $table->timestamps();
         });
     }

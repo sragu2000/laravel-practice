@@ -16,4 +16,7 @@ class SupplierController extends Controller
         $newSupplier->save();
         return response()->json(array("message" => "success", "result" => true), 200);
     }
+    public function getSuppliers(Request $r){
+        return response()->json(array("suppliers"=>Supplier::get()),200);
+    }
 }

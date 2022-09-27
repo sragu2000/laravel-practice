@@ -38,6 +38,8 @@ Route::post("addUser",[UserController::class,"addNewUser"]);
 Route::post("loginUser",[UserController::class,"loginUser"]);
 Route::post("addtype",[productTypeController::class,"addNewType"]);
 Route::get("getProductTypes",[productTypeController::class,"getProductTypes"]);
+Route::get("getProducts",[ProductController::class,"getProducts"]);
+Route::get("getSuppliers",[SupplierController::class,"getSuppliers"]);
 Route::post("addproduct",[ProductController::class,"addNewProduct"]);
 Route::post("addsupplier",[SupplierController::class,"addNewSupplier"]);
 Route::post("addpurchase",[PurchaseController::class,"addPurchase"]);

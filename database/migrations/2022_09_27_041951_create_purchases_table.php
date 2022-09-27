@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('productId');
             $table->integer('quantity');
             $table->double('purchasePrice');
-            $table->double('retailPrice');
             $table->date('date');
             $table->timestamps();
         });

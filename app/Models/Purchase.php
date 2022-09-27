@@ -15,7 +15,6 @@ class Purchase extends Model
         'productId',
         'quantity',
         'purchasePrice',
-        'retailPrice',
         'date',
     ];
 }
