@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\productTypeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PurchaseController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,3 +40,4 @@ Route::post("addtype",[productTypeController::class,"addNewType"]);
 Route::get("getProductTypes",[productTypeController::class,"getProductTypes"]);
 Route::post("addproduct",[ProductController::class,"addNewProduct"]);
 Route::post("addsupplier",[SupplierController::class,"addNewSupplier"]);
+Route::post("addpurchase",[PurchaseController::class,"addPurchase"]);
