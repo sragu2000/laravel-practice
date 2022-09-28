@@ -22,4 +22,9 @@ class ProductController extends Controller
     public function getProducts(Request $r){
         return response()->json(array("products"=>Product::get()),200);
     }
+
+    public function getAvailableStock(Request $r){
+        $currentStock=intval(Product::where('id',$r->productid)->value('currentStock')) ;
+        return response()->json(array("quantity"=>$currentStock),200);
+    }
 }

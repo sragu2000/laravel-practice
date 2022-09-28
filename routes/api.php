@@ -43,3 +43,5 @@ Route::get("getSuppliers",[SupplierController::class,"getSuppliers"]);
 Route::post("addproduct",[ProductController::class,"addNewProduct"]);
 Route::post("addsupplier",[SupplierController::class,"addNewSupplier"]);
 Route::post("addpurchase",[PurchaseController::class,"addPurchase"]);
+// `http://127.0.0.1:8000/api/getAvailableStock/${issueProductId}
+Route::get("getAvailableStock",[ProductController::class,"getAvailableStock"]);
