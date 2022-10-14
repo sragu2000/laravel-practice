@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Purchase;
 use App\Models\Product;
+use App\Models\Issue;
+use Illuminate\Support\Facades\DB;
 
 class PurchaseController extends Controller
 {
@@ -21,12 +23,36 @@ class PurchaseController extends Controller
         $newSupplier->save();
 
         // update product table
-        $currentStock=intval(Product::where('id',$r->productid)->value('currentStock')) ;
-        Product::where('id',$r->productid)->update(['currentStock'=>$currentStock+intval($r->quantity)]);
+        $currentStock = intval(Product::where('id', $r->productid)->value('currentStock'));
+        Product::where('id', $r->productid)->update(['currentStock' => $currentStock + intval($r->quantity)]);
 
-        $currentPrice=intval(Product::where('id',$r->productid)->value('wacPrice')) ;
-        Product::where('id',$r->productid)->update(['wacPrice'=>$currentPrice+(intval($r->quantity)*intval($r->purchaseprice))]);
+        $currentPrice = intval(Product::where('id', $r->productid)->value('wacPrice'));
+        Product::where('id', $r->productid)->update(['wacPrice' => $currentPrice + (intval($r->quantity) * intval($r->purchaseprice))]);
 
         return response()->json(array("message" => "success", "result" => true), 200);
+    }
+
+    public function getSupplierForProduct(Request $r)
+    {
+        $prd = Product::where('id', $r->prdid)->value('prdName');
+        $data = Purchase::join("suppliers", "suppliers.id", "=", "purchases.supplierId")
+            ->where('productId', $r->prdid)->distinct()
+            ->get(["suppliers.supplierName", "suppliers.supplierEmail", "suppliers.supplierAddress", "suppliers.supplierPhone", "suppliers.id"]);
+        return response()->json(array("Product" => $prd, "suppliers" => $data), 200);
+    }
+    public function getTransactions(Request $r)
+    {
+        $prd = Product::where('id', $r->prdid)->value('prdName');
+        $first=DB::table("purchases")
+        ->select("quantity", "purchasePrice as price", "created_at", "event","date")
+        ->where('productId',"=", $r->prdid);
+        $second=DB::table("issues")
+        ->select("quantity", "atprice as price", "created_at", "event","date")
+        ->where('productId',"=", $r->prdid)
+        ->union($first)
+        ->orderBy("created_at")
+        ->get();
+        return response()->json(array("product"=>$prd,"transactions" => $second), 200);
+
     }
 }

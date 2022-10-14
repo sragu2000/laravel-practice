@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('productId');
             $table->integer('quantity');
             $table->double('purchasePrice');
+            $table->boolean("event")->default(1);
             $table->date('date');
             $table->timestamps();
         });

@@ -8,30 +8,11 @@ use App\Http\Controllers\productTypeController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
+use App\Http\Controllers\IssueController;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
-// Without Controller
-// Route::get("addNumbers",function(Request $r){
-//     $firstNumber = intval($r->fn);
-//     $secondNumber = intval($r->sn);
-//     $total=$firstNumber+$secondNumber;
-//     return response()->json(array("total"=>$total),200);
-// });
-
-//With Controller 
 Route::get("addNumbers",[First::class,"addNumbers"]);
 Route::get("getUser",[UserController::class,"getSingleUser"]);
 Route::post("addUser",[UserController::class,"addNewUser"]);
@@ -43,5 +24,10 @@ Route::get("getSuppliers",[SupplierController::class,"getSuppliers"]);
 Route::post("addproduct",[ProductController::class,"addNewProduct"]);
 Route::post("addsupplier",[SupplierController::class,"addNewSupplier"]);
 Route::post("addpurchase",[PurchaseController::class,"addPurchase"]);
-// `http://127.0.0.1:8000/api/getAvailableStock/${issueProductId}
 Route::get("getAvailableStock",[ProductController::class,"getAvailableStock"]);
+Route::get("getIssues",[IssueController::class,"getIssues"]);
+Route::post("addIssues",[IssueController::class,"addIssues"]);
+Route::get("getAvailableProducts",[ProductController::class,"getAvailableProducts"]);
+Route::get("getSupplierForProduct",[PurchaseController::class,"getSupplierForProduct"]);
+Route::get("getTransactions",[PurchaseController::class,"getTransactions"]);
+

@@ -19,4 +19,5 @@ class SupplierController extends Controller
     public function getSuppliers(Request $r){
         return response()->json(array("suppliers"=>Supplier::get()),200);
     }
+    
 }
