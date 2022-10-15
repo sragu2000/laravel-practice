@@ -30,4 +30,6 @@ Route::post("addIssues",[IssueController::class,"addIssues"]);
 Route::get("getAvailableProducts",[ProductController::class,"getAvailableProducts"]);
 Route::get("getSupplierForProduct",[PurchaseController::class,"getSupplierForProduct"]);
 Route::get("getTransactions",[PurchaseController::class,"getTransactions"]);
+Route::post("modifyTransactions",[PurchaseController::class,"modifyTransactions"]);
+
 

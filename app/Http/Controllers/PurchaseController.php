@@ -42,17 +42,33 @@ class PurchaseController extends Controller
     }
     public function getTransactions(Request $r)
     {
-        $prd = Product::where('id', $r->prdid)->value('prdName');
+        $row= Product::where('id', $r->prdid);
+        $prd=$row->value('prdName');
         $first=DB::table("purchases")
-        ->select("quantity", "purchasePrice as price", "created_at", "event","date")
+        ->select("quantity", "purchasePrice as price", "created_at", "event","date","id")
         ->where('productId',"=", $r->prdid);
         $second=DB::table("issues")
-        ->select("quantity", "atprice as price", "created_at", "event","date")
+        ->select("quantity", "atprice as price", "created_at", "event","date","id")
         ->where('productId',"=", $r->prdid)
         ->union($first)
         ->orderBy("created_at")
         ->get();
-        return response()->json(array("product"=>$prd,"transactions" => $second), 200);
-
+        return response()->json(array(
+            "product"=>$prd,
+            "productId"=>$r->prdid,
+            "transactions" => $second
+        ), 200);
     }
+
+    // public function modifyTransactions(Request $r){
+    //     // $productId=$r->productId;  // NO NEED !
+    //     $eventType=$r->eventType;
+    //     $transactionId=$r->transactionId;
+    //     $newQuantity=$r->newQuantity;
+    //     // if eventType =1 ; purchase | else issue
+    //     if($eventType==1){
+    //         $quantityInDatabase = Purchase::where('id', $transactionId)->value('quantity');
+
+    //     }
+    // }
 }
