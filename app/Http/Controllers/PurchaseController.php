@@ -42,20 +42,30 @@ class PurchaseController extends Controller
     }
     public function getTransactions(Request $r)
     {
+        //to get product name
         $row= Product::where('id', $r->prdid);
         $prd=$row->value('prdName');
+
+        //last purchase
+        $lastPurchase = Purchase::where('productId', $r->prdid)->orderBy("id","DESC")->first();
+        $lastIssue = Issue::where('productId', $r->prdid)->orderBy("id","DESC")->first();
+
         $first=DB::table("purchases")
         ->select("quantity", "purchasePrice as price", "created_at", "event","date","id")
         ->where('productId',"=", $r->prdid);
+
         $second=DB::table("issues")
         ->select("quantity", "atprice as price", "created_at", "event","date","id")
         ->where('productId',"=", $r->prdid)
         ->union($first)
         ->orderBy("created_at")
         ->get();
+
         return response()->json(array(
             "product"=>$prd,
             "productId"=>$r->prdid,
+            "LastIssue"=>$lastIssue,
+            "LastPurchase"=>$lastPurchase,
             "transactions" => $second
         ), 200);
     }
