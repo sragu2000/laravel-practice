@@ -1,0 +1,8 @@
+localhost/phpmyadmin => create database "backend"
+
+open backend folder in CMD and run "php artisan migrate"
+
+start laravel server : php artisan serve
+
+start frontend application 
+	open Inventory-FrontEnd in CMD and run npm start
